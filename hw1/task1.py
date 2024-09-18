@@ -1,3 +1,4 @@
+# Vigenère cipher encoder
 plaintext = input("Enter plaintext:")
 cipherkey = input("Enter cipher key:")
 
