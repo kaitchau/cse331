@@ -1,2 +1,5 @@
-pt = input("Enter plaintext:")
-ck = input("Enter cipher key:")
+plaintext = input("Enter plaintext:")
+cipherkey = input("Enter cipher key:")
+
+for char in plaintext:
+    # here
