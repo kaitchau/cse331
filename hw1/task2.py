@@ -1,4 +1,5 @@
 # Vigenère cipher decoder
+# Only difference is u subtract the key instead of add like in the encoder
 ciphertext = input("Enter ciphertext:")
 cipherkey = input("Enter cipher key:")
 plaintext = ''
