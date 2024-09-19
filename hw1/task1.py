@@ -14,7 +14,7 @@ for char in plaintext:
         # print('key:'+ str(key))
 
         if(char.isupper()):
-            #handle wrap around for upper
+            #handle wrap around
             ascii= (ascii-65+key)%26+65
         elif(char.islower()):
             ascii= (ascii-97+key)%26+97
