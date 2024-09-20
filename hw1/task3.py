@@ -10,34 +10,34 @@ alpha_only_ciphertext = ''
 array = ['' for i in range(cklength)]
 
 # numbers taken from wikipedia
-expected_alpha_freq = [
-    8.2,   # A
-    1.5,   # B
-    2.8,   # C
-    4.3,   # D
-    12.7,  # E
-    2.2,   # F
-    2.0,   # G
-    6.1,   # H
-    7.0,   # I
-    0.15,  # J
-    0.77,  # K
-    4.0,   # L
-    2.4,   # M
-    6.7,   # N
-    7.5,   # O
-    1.9,   # P
-    0.095, # Q
-    6.0,   # R
-    6.3,   # S
-    9.1,   # T
-    2.8,   # U
-    0.98,  # V
-    2.4,   # W
-    0.15,  # X
-    2.0,   # Y
-    0.074  # Z
-]
+expected_alpha_freq = {
+    'A': 8.167,
+    'B': 1.492,
+    'C': 2.782,
+    'D': 4.253,
+    'E': 12.702,
+    'F': 2.228,
+    'G': 2.015,
+    'H': 6.094,
+    'I': 6.966,
+    'J': 0.153,
+    'K': 0.772,
+    'L': 4.025,
+    'M': 2.406,
+    'N': 6.749,
+    'O': 7.507,
+    'P': 1.929,
+    'Q': 0.095,
+    'R': 5.987,
+    'S': 6.327,
+    'T': 9.056,
+    'U': 2.758,
+    'V': 0.978,
+    'W': 2.360,
+    'X': 0.150,
+    'Y': 1.974,
+    'Z': 0.074
+}
 
 #Only consider alpha chars
 for char in ciphertext:
@@ -53,34 +53,34 @@ for char in alpha_only_ciphertext:
         ct=0
 
 
-# Analyze each column to find the best shift
-for idx, col in enumerate(array):
-    print(f"Analyzing column {idx+1}")
-    the_shift = ''
+# For each column in the array (corresponding to each key position)
+for i in array:
     min_chi_sq = float('inf')
+    best_shift = 0
 
+    # Try all 26 possible shifts
     for alphashift in range(26):
-        shifted = ''.join(chr(((ord(char) - 65 - alphashift) % 26) + 65) for char in col)
+        # Shift the column by alphashift
+        shifted = ''.join(chr(((ord(char) - 65 - alphashift) % 26) + 65) for char in i)
 
+        # Count letter frequencies in the shifted text
         alpha_freq = Counter(shifted)
-        
+
+        # Calculate chi-squared value
         chi_sq = 0
-        length = len(col)
         for j in range(26):
             letter = chr(j + 65)
-            expected = length * (expected_alpha_freq[j] / 100)
+            expected = len(i) * (expected_alpha_freq[letter] / 100)
             observed = alpha_freq.get(letter, 0)
             if expected > 0:
                 chi_sq += ((observed - expected) ** 2) / expected
-        
-        print(f"Shift: {alphashift}, Chi-squared: {chi_sq}")
 
+        # If this shift gives a lower chi-squared value, it's a better fit
         if chi_sq < min_chi_sq:
             min_chi_sq = chi_sq
-            the_shift = alphashift
+            best_shift = alphashift
 
-    cipherkey += chr(the_shift + 65)
+    # Append the best shift (as a letter) to the cipherkey
+    cipherkey += chr(best_shift + 65)
 
 print(f"Recovered key: {cipherkey}")
-
-

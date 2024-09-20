@@ -1,7 +1,7 @@
 # Vigenère cipher decoder
 # Only difference is u subtract the key instead of add like in the encoder
-ciphertext = input("Enter ciphertext:")
-cipherkey = input("Enter cipher key:")
+ciphertext = input()
+cipherkey = input()
 plaintext = ''
 # Uppercase A-Z => 65-90 in ASCII
 # lowercase a-z => 97-122 in ASCII

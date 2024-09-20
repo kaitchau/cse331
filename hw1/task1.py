@@ -1,6 +1,6 @@
 # Vigenère cipher encoder
-plaintext = input("Enter plaintext:")
-cipherkey = input("Enter cipher key:")
+plaintext = input()
+cipherkey = input()
 ciphertext = ''
 # Uppercase A-Z => 65-90 in ASCII
 # lowercase a-z => 97-122 in ASCII
@@ -20,6 +20,8 @@ for char in plaintext:
             ascii= (ascii-97+key)%26+97
 
         ciphertext = ciphertext + chr(ascii)
+
+        # only increment in the cipherkey for alphabet letters
         ct+=1
         if ct>=len(cipherkey):
             ct=0
