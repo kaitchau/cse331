@@ -51,7 +51,7 @@ def brute_force(data):
         for row in output:
             writer.writerow(row)
 
-        writer.writerow([f"TOTALTIME [{total_time:.2f} seconds]"])    
+        writer.writerow([f"TOTALTIME [{total_time} seconds]"])    
         success_rate = (success_ct/total)*100
         writer.writerow([f"SUCCESSRATE [{success_rate}%]"])
         
